@@ -5,6 +5,7 @@
  */
 
 #include <iostream>
+#include "brain.h"
 
 //== Data structures
 static constexpr short default_max_guess_value{ 30 };  //!< Default max guess
@@ -67,6 +68,14 @@ int process_arguments(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
   auto max_guess = process_arguments(argc, argv);
   display_game_rules(max_guess);
+  int guess{max_guess/2}, l{1}, r{max_guess};
+  GameBrain GB(max_guess);
+  while (int status = GB.make_guess(guess) != 0) {
+    if (status == 1) {
 
+    } else {
+
+    }
+  }
   return 0;
 }
