@@ -4,15 +4,23 @@
 #include <random>
 #include <iostream>
 
-class GameBrain {
+class GameBrain
+{
   int answer;
   int prev_guess;
-  public:
-    GameBrain(int maxint);
-    int make_guess(int guess);
-    void begin();
+
+public:
+  GameBrain(int maxint);
+  int make_guess(int guess);
+  void begin();
 };
 
-enum status {hot, cold, right, start};
+enum status
+{
+  hot,
+  cold,
+  right,
+  start
+};
 
 #endif

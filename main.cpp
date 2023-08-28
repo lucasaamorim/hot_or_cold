@@ -1,20 +1,15 @@
-/*!
- * This program implements the game Hot or Cold.
- * @author Selan
- * @date August 23rd, 2023.
- */
-
 #include <iostream>
 #include "brain.h"
 
 //== Data structures
-static constexpr short default_max_guess_value{ 30 };  //!< Default max guess
-static constexpr short max_guess_value{ 100 };         //!< Max guess value.
+static constexpr short default_max_guess_value{30}; //!< Default max guess
+static constexpr short max_guess_value{100};        //!< Max guess value.
 
 //== Functions
 
 /// Display basic instructions on how to run the program.
-void usage() {
+void usage()
+{
   std::cout << "\nUsage: ./hot_cold [<upper_limit>]\n\n";
   std::cout << "where <upper_limit> is the max guess value (default: 30).\n";
   std::cout << "the guess range is definied as [1,<upper_limit>].\n\n";
@@ -24,7 +19,8 @@ void usage() {
  * Display the game rules.
  * @param max_value Max guess value.
  */
-void display_game_rules(int max_value) {
+void display_game_rules(int max_value)
+{
   std::cout << "===================================================\n";
   std::cout << "Welcome to the Hot-Cold Guess game, copyright 2023.\n";
   std::cout << "---------------------------------------------------\n";
@@ -40,20 +36,23 @@ void display_game_rules(int max_value) {
 }
 
 /// Process the command line arguments.
-int process_arguments(int argc, char* argv[]) {
+int process_arguments(int argc, char *argv[])
+{
   // Define a default value here.
   int user_max_guess{default_max_guess_value};
   // Too many arguments.
-  if (argc > 2) {
+  if (argc > 2)
+  {
     std::cerr << ">>> Wrong number of arguments.\n";
     usage();
     exit(1);
   }
   // We received the max guess value from command line.
-  if (argc == 2) {
-    // TODO: Assumindo que o valor é válido, por enquanto.
+  if (argc == 2)
+  {
     user_max_guess = std::atoi(argv[1]);
-    if (user_max_guess > ::max_guess_value or user_max_guess < 1) {
+    if (user_max_guess > ::max_guess_value or user_max_guess < 1)
+    {
       std::cout << ">>> You provided an invalid max guess value. Choose a value in: [1," << max_guess_value
                 << "]\n";
       usage();
@@ -65,10 +64,14 @@ int process_arguments(int argc, char* argv[]) {
 
 //== main program
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
   auto max_guess = process_arguments(argc, argv);
   display_game_rules(max_guess);
+
+  // Generate a random number through the class constructor
   GameBrain GB(max_guess);
+  // Make call to start the game
   GB.begin();
   return 0;
 }
