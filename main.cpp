@@ -45,7 +45,7 @@ int process_arguments(int argc, char* argv[]) {
   int user_max_guess{default_max_guess_value};
   // Too many arguments.
   if (argc > 2) {
-    std::cout << ">>> Wrong number of arguments.\n";
+    std::cerr << ">>> Wrong number of arguments.\n";
     usage();
     exit(1);
   }
@@ -68,14 +68,7 @@ int process_arguments(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
   auto max_guess = process_arguments(argc, argv);
   display_game_rules(max_guess);
-  int guess{max_guess/2}, l{1}, r{max_guess};
   GameBrain GB(max_guess);
-  while (int status = GB.make_guess(guess) != 0) {
-    if (status == 1) {
-
-    } else {
-
-    }
-  }
+  GB.begin();
   return 0;
 }

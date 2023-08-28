@@ -9,16 +9,30 @@ GameBrain::GameBrain(int maxint) {
 }
 
 int GameBrain::make_guess(int guess) {
-    if (guess == this->answer) {
+    if (guess == answer) {
         std::cout << ">>> Yeah, correct guess!\n";
-        return 0;
+        return status::right;
     }
-    std::cout << ">>> Nop,";
     if (prev_guess != (int)1e9) {
-        if (abs(guess - this->answer) < abs(prev_guess - this->answer)) {
-            std::cout << "it's hot though, try again:";
+        if (abs(guess - answer) < abs(prev_guess - answer)) {
+            std::cout << "Nop, it's hot though, try again: ";
+            prev_guess = guess;
+            return status::hot;
+        } else {
+            std::cout << "Nop, it's getting cold, try again: ";
+            prev_guess = guess;
+            return status::cold;
         }
     } else {
-        std::cout << "try again:";
+        std::cout << ">>> Nop, try again: ";
+        prev_guess = guess;
+        return status::start;
     }
+}
+
+void GameBrain::begin() {
+    int guess;
+    std::cout << "Guess the Number: ";
+    std::cin >> guess;
+    while (make_guess(guess) != status::right) std::cin >> guess;
 }

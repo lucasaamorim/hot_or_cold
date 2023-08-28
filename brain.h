@@ -10,6 +10,9 @@ class GameBrain {
   public:
     GameBrain(int maxint);
     int make_guess(int guess);
+    void begin();
 };
+
+enum status {hot, cold, right, start};
 
 #endif
